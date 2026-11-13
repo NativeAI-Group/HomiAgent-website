@@ -120,8 +120,8 @@ const translations = {
     "From understanding to action"
   ],
   "tech.three.body": [
-    "连接 RoboBrain 的高层理解与决策，以及 GAM 的动作生成与闭环执行。",
-    "Connect high-level understanding and decisions in RoboBrain with action generation and closed-loop execution in GAM."
+    "连接 RoboBrain 的高层理解与决策，以及 RoboGAM 的动作生成与闭环执行。",
+    "Connect high-level understanding and decisions in RoboBrain with action generation and closed-loop execution in RoboGAM."
   ],
   "tech.three.tag3": [
     "协同执行",
@@ -373,10 +373,10 @@ const details = {
   homimodel: {
     category: 'THE MODEL / HomiModel',
     subtitle: ['大脑 + 小脑', 'Brain + cerebellum'],
-    description: ['RoboBrain 与 GAM 协同，连接高层决策与底层动作执行。', 'RoboBrain and GAM connect high-level decisions with low-level action execution.'],
+    description: ['RoboBrain 与 RoboGAM 协同，连接高层决策与底层动作执行。', 'RoboBrain and RoboGAM connect high-level decisions with low-level action execution.'],
     points: [
       [['RoboBrain · 理解与决策', 'RoboBrain · Understanding and decisions'], ['理解家庭任务，进行高层决策。', 'Understand household tasks and make high-level decisions.']],
-      [['GAM · 动作生成与执行', 'GAM · Action generation and execution'], ['生成底层动作，根据环境反馈执行。', 'Generate low-level actions and execute using environmental feedback.']],
+      [['RoboGAM · 动作生成与执行', 'RoboGAM · Action generation and execution'], ['RoboGAM（Geometry Action Model）生成底层动作，并根据环境反馈执行。', 'RoboGAM (Geometry Action Model) generates low-level actions and executes using environmental feedback.']],
       [['大小脑协同', 'Model coordination'], ['连接任务决策、动作生成与执行反馈。', 'Connect task decisions, action generation, and execution feedback.']],
     ],
   },
