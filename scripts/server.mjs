@@ -1,8 +1,9 @@
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = resolve(process.argv.includes('--dist') ? 'dist' : '.');
+const root = resolve(fileURLToPath(new URL(process.argv.includes('--dist') ? '../dist/' : '../src/', import.meta.url)));
 const portFlag = process.argv.indexOf('--port');
 const port = Number(process.env.PORT || (portFlag >= 0 ? process.argv[portFlag + 1] : 5173));
 const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' };

@@ -1,56 +1,80 @@
-# HomiAgent
+# HomiAgent Website
 
 A responsive, bilingual website for HomiAgent: an open-source embodied Agent project for real homes, built together with developers.
 
-## Run locally
+**Website:** [nativeai-group.github.io/HomiAgent-website](https://nativeai-group.github.io/HomiAgent-website/)
 
-Requires Node.js 18 or newer. No dependency installation is needed.
+## Requirements
+
+Use Node.js 24 or newer. The `.nvmrc` file selects Node.js 24 for local development and GitHub Actions. No dependency installation is needed.
+
+If you use nvm, run `nvm install` and `nvm use` from the repository root.
+
+## Project structure
+
+```text
+.
+├── .github/workflows/
+│   └── deploy-pages.yml  # Build and publish to GitHub Pages
+├── src/                  # Website source; copied to dist/ during builds
+│   ├── index.html        # Content and semantic page structure
+│   ├── styles.css        # Responsive layout, colors, and motion
+│   ├── app.js            # Translations, navigation, and dialogs
+│   └── assets/           # SVG illustrations and favicon
+├── scripts/
+│   ├── build.mjs         # Generate a clean dist/ from src/
+│   └── server.mjs        # Serve src/ or preview dist/ locally
+├── .gitignore
+├── .nvmrc
+├── package.json
+└── README.md
+```
+
+`dist/` is generated and excluded from version control. Edit files in `src/`; changes made directly to `dist/` are overwritten by the next build.
+
+## Local development
 
 ```sh
 npm run dev
 ```
 
-Open http://localhost:5173. To choose another port, use `npm run dev -- --port 3000`.
+Open [localhost:5173](http://localhost:5173). The server serves `src/` directly; refresh the browser after editing a file. `npm start` runs the same server.
 
-## Build
+To use another port:
+
+```sh
+npm run dev -- --port 3000
+```
+
+## Build and preview
 
 ```sh
 npm run build
 npm run preview
 ```
 
-The `dist/` folder contains the complete static website and can be deployed to any static web host.
-
-## Cloudflare Workers
-
-The included `wrangler.jsonc` configures this project as a static website. Wrangler automatically runs `npm run build` to regenerate `dist/` before serving or deploying it.
-
-For local Cloudflare preview (this does not publish the website):
+The build clears the previous `dist/` and copies the complete `src/` directory into it. Preview serves only the generated output at [localhost:5173](http://localhost:5173). Stop the development server first, or choose a separate port:
 
 ```sh
-npx wrangler dev
+npm run preview -- --port 4173
 ```
 
-Open the local URL printed in the terminal, normally http://localhost:8787.
+Asset paths are relative so the website works under the GitHub Pages project path `/HomiAgent-website/`.
 
-To publish the website to Cloudflare Workers:
+## Deploy to GitHub Pages
 
-```sh
-npx wrangler login
-npx wrangler deploy
-```
+The repository uses `.github/workflows/deploy-pages.yml`. In the repository's **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**.
 
-Wrangler requires a supported Node.js version; use Node.js 22 or newer for Wrangler 4. The existing `npm run dev` command remains available for a simple local preview without Wrangler.
+Every push to `main` builds the website with `npm run build`, uploads `dist/`, and deploys it to GitHub Pages. You can also trigger **Deploy website to GitHub Pages** manually from the **Actions** tab using **Run workflow**.
 
-## Contents
+The workflow reads its Node.js version from `.nvmrc`. It does not need third-party hosting credentials or a dependency installation step.
 
-- `index.html`: page content and accessible semantic structure.
-- `styles.css`: responsive styling, diagrams, motion, and reduced-motion support.
-- `app.js`: Chinese/English translations, mobile navigation, and technology detail dialogs.
-- `assets/`: original SVG living-room illustration, three exploration concept diagrams, and brand favicon.
+## Content and behavior
 
-The default language is English; language preference is saved locally when browser storage is available. The initial HTML is also in English. The illustration is local and works offline. Google Fonts are optional, with system-font fallbacks. GitHub entry points explicitly link to the NativeAI-Group organization until a project repository is available. Module documentation buttons are disabled and labeled “Coming soon”; replace them with documentation links when ready. Demonstration learning, self-evolution, and proactivity are presented as open exploration directions.
+The default language is English; the initial HTML is also in English. Chinese/English preference is saved locally when browser storage is available. Both languages include page metadata, illustration descriptions, and process captions.
 
-The page follows this order: project introduction, project beliefs, architecture and module overviews, open exploration directions, technical articles, and contribution paths. All content is available in English and Chinese, including metadata.
+The page follows this order: project introduction, project beliefs, architecture and module overviews, open exploration directions, technical articles, and contribution paths.
 
-The exploration cards use local, static SVG diagrams with bilingual process captions and image descriptions. They illustrate demonstration learning, feedback-driven adaptation, and context-and-memory-based decisions without presenting them as released capabilities.
+Illustrations are local SVG files. Google Fonts are optional, with system-font fallbacks. The exploration section uses a pale sage palette with small orange accents. Its diagrams illustrate demonstration learning, feedback-driven adaptation, and context-and-memory-based decisions as open research directions.
+
+GitHub entry points link to the NativeAI-Group organization. Module documentation buttons are disabled and labeled “Coming soon”; replace them with documentation links when ready.
